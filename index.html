@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173f76">
+  <meta name="description" content="王政权的智能救援机器人结构作品集：交互查看省赛和国赛两版三维总装。">
+  <link rel="canonical" href="https://smartzjr.github.io/rescue-robot-portfolio/">
+  <title>智能救援机器人 · 王政权的结构作品集</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23173f76'/%3E%3Cpath d='M12 30V17h24v13M18 17v-5m12 5v-5M16 33h16' stroke='white' stroke-width='3' fill='none'/%3E%3Ccircle cx='20' cy='24' r='2' fill='white'/%3E%3Ccircle cx='28' cy='24' r='2' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
+  <script type="module" src="./viewer.js"></script>
+</head>
+<body>
+  <header class="header shell">
+    <a class="identity" href="#"><span class="identity-mark" aria-hidden="true">W</span><span>王政权 <small>工程作品集</small></span></a>
+    <nav aria-label="页面导航"><a href="#models">三维展示</a><a href="#about">项目简介</a><button id="share" class="share-button">分享作品 <span aria-hidden="true">↗</span></button></nav>
+  </header>
+  <main>
+    <section class="intro shell">
+      <div><p class="eyebrow">2025 / ROBOTICS DESIGN</p><h1>智能救援机器人<span>结构设计作品集</span></h1></div>
+      <div class="intro-aside"><span class="award">中国大学生工程实践与创新能力大赛 · 国赛特等奖</span><p>从省赛到国赛，直观查看两版整车装配。<br>拖动模型，探索机构与零件之间的关系。</p></div>
+    </section>
+    <section class="model-section shell" id="models" aria-label="机器人三维模型">
+      <div class="workspace-top">
+        <div class="version-tabs" role="tablist" aria-label="选择赛程版本"><button id="tab-provincial" role="tab" aria-selected="true" aria-controls="model-workspace" data-model="provincial">省赛方案 <span>01</span></button><button id="tab-national" role="tab" aria-selected="false" aria-controls="model-workspace" data-model="national">国赛方案 <span>02</span></button></div>
+        <span class="interaction-hint">拖动旋转 · 滚轮缩放 · 右键平移</span>
+      </div>
+      <div id="model-workspace" class="workspace" role="tabpanel" aria-labelledby="tab-provincial">
+        <div class="stage" id="stage">
+          <div class="stage-label"><span class="live-dot"></span><span id="stage-title">省赛整车</span><span class="preview-tag">3D 预览</span></div>
+          <div id="canvas-host" aria-label="可旋转缩放的机器人三维模型"></div>
+          <div id="load-state" class="load-state" role="status"><div class="spinner"></div><strong>正在载入整车模型</strong><span id="load-detail">首次打开需要下载模型，请稍候</span></div>
+          <div class="view-buttons" aria-label="选择观察方向"><button data-view="iso" aria-label="切换到等轴视角" title="等轴视角" class="active">立体</button><button data-view="front" aria-label="切换到正面视角">正面</button><button data-view="top" aria-label="切换到俯视视角">俯视</button><button id="fullscreen" title="全屏查看" aria-label="全屏查看">⛶</button></div>
+          <div class="stage-bottom"><span id="selection-status" aria-live="polite">点击模型可以选择零件</span><button id="reset">重置视角 ↺</button></div>
+        </div>
+        <aside class="inspector" aria-label="模型查看选项">
+          <p class="eyebrow">ASSEMBLY EXPLORER</p><h2 id="version-title">省赛整车</h2><p id="version-description" class="version-description">省赛阶段的整车装配模型。</p>
+          <div class="stats"><div><strong id="mesh-count">—</strong><span>几何部件</span></div><div><strong>mm</strong><span>模型单位</span></div></div>
+          <div class="control-group"><div class="control-label"><label for="explode">结构展开</label><output for="explode" id="explode-value">0%</output></div><input id="explode" type="range" min="0" max="100" value="0"><p class="microcopy">示意展开，便于观察被遮挡的结构。</p></div>
+          <div class="toggle-row"><button id="wireframe" aria-pressed="false">线框</button><button id="transparent" aria-pressed="false">半透明</button><button id="rotate" aria-pressed="false">自动旋转</button></div>
+          <div class="parts-heading"><h3>零件列表</h3><button id="show-all">显示全部</button></div>
+          <label class="sr-only" for="part-search">搜索零件名称</label><input id="part-search" class="part-search" placeholder="搜索零件名称" type="search" autocomplete="off">
+          <div id="part-list" class="part-list" aria-label="零件列表"><p class="empty-state">模型载入后显示零件</p></div>
+          <button id="hide-selected" class="hide-selected" disabled>隐藏所选零件</button>
+        </aside>
+      </div>
+      <div class="viewer-caption"><span><span class="small-cross" aria-hidden="true">＋</span> 浏览器直接查看，无需安装 CAD 软件</span><span>省赛 / 国赛 · 两版总装</span></div>
+    </section>
+    <section class="about shell" id="about">
+      <div class="about-title"><p class="eyebrow">PROJECT NOTES</p><h2>从机械结构<br>到视觉落地。</h2></div>
+      <div class="about-content">
+        <div class="project-metrics"><div><strong>300 <small>mm</small></strong><span>机构伸缩行程</span></div><div><strong>40–140 <small>mm</small></strong><span>转运物块尺寸</span></div><div><strong>50+</strong><span>连续测试成功次数</span></div></div>
+        <div><h3>机械结构设计</h3><p>独立完成省赛、国赛两版机械结构，使用 SolidWorks 设计并通过 3D 打印加工。伸缩机构采用蜗轮蜗杆传动，为转运提供驱动力；摄像头位于伸缩前端，增设 Pitch 轴调整俯仰角度。</p></div>
+        <div><h3>视觉开发与部署</h3><p>基于 YOLO11 完成数据采集、模型训练、转换及 MaixCAM 部署，并独立编写目标位置计算、抓取判断和串口通信逻辑。主控采用 STM32F407，驱动使用大疆 M2006 电机。</p></div>
+        <div><h3>定位问题处理</h3><p>针对轮子打滑造成的里程计误差，结合场地特征位置与当前航向角判断机器人所在的大致区域，再通过旋转扫描辅助确认位置。</p></div>
+        <div><h3>个人职责</h3><p>担任项目队长，负责全部机械结构和视觉代码。校赛阶段承担电控开发，后续交由自己指导的大一队员负责。</p></div>
+        <div class="about-note"><h3>展示内容</h3><p>此页展示省赛与国赛的两版总装，可切换版本、旋转缩放、选择和隐藏零件。模型包含自制结构及配套标准件、外购件。</p></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer shell"><span>王政权 · 智能救援机器人</span><span>结构作品集 / 2025</span></footer>
+  <dialog id="share-dialog"><button id="close-share" class="close-share" aria-label="关闭分享窗口">×</button><p class="eyebrow">SHARE THIS PROJECT</p><h2>扫码查看作品</h2><img src="./share-qr.svg" width="216" height="216" alt="智能救援机器人作品集二维码"><p class="share-note">可放入简历或展示资料</p><label class="sr-only" for="share-url">作品集网址</label><input id="share-url" readonly><button id="copy-link" class="copy-link">复制链接</button><p id="copy-status" role="status"></p></dialog>
+  <noscript><p class="noscript">请启用浏览器 JavaScript 后查看交互式三维模型。</p></noscript>
+</body>
+</html>
